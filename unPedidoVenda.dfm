@@ -21,8 +21,6 @@ inherited FormPedidoVenda: TFormPedidoVenda
       Align = alClient
       Caption = 'Pedido - Produtos'
       TabOrder = 0
-      ExplicitLeft = 2
-      ExplicitTop = 107
       object panedtprodutopedido: TPanel
         Left = 2
         Top = 342

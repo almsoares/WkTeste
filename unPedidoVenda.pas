@@ -161,12 +161,14 @@ begin
   end;
   tbPedidoProduto.Refresh;
   spbSelecionaPedido.Visible:= True;
+  spbSelecionaPedido.Enabled:= True;
   spbExcluirPedido.Visible:= True;
   spbExcluirPedido.Enabled:= False;
   edNumeroPedido.Visible:= True;
 
   HabilitaCampo(edClienteID);
   HabilitaCampo(edDataEmissao);
+  edDataEmissao.Enabled:= True;
   spbCliente.Enabled:= True;
 
   HabilitaCampo(edProdutoID);
@@ -192,6 +194,7 @@ begin
     if StrToInt(edClienteID.Text)>0 then
     begin
       spbSelecionaPedido.Visible:= False;
+      //spbSelecionaPedido.Enabled:= True;
       spbExcluirPedido.Visible:= False;
       //spbExcluirPedido.Enabled:= False;
 
@@ -541,6 +544,7 @@ begin
   QryPadrao.Free;
   DesabilitaCampo(edClienteID);
   DesabilitaCampo(edDataEmissao);
+  edDataEmissao.Enabled:= False;
   spbCliente.Enabled:= False;
 
   DesabilitaCampo(edProdutoID);
@@ -551,6 +555,7 @@ begin
   spbGravarPedido.Enabled:= False;
   spbExcluirPedido.Visible:= True;
   spbExcluirPedido.Enabled:= True;
+  spbSelecionaPedido.Enabled:= False;
 
   FormStatus:= frShow;
 end;

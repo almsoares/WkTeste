@@ -17,6 +17,7 @@ type
   TFormModelo = class(TForm)
     panClient: TPanel;
     panBottlon: TPanel;
+    lblEscape: TLabel;
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormCreate(Sender: TObject);
   private

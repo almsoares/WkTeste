@@ -32,5 +32,12 @@ object FormModelo: TFormModelo
     Height = 41
     Align = alBottom
     TabOrder = 1
+    object lblEscape: TLabel
+      Left = 8
+      Top = 14
+      Width = 142
+      Height = 13
+      Caption = '<Escape> - Fecha Formul'#225'rio'
+    end
   end
 end
