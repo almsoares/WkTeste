@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Módulo          : Formulário Pedido de Venda
 // Tipo            : Mestre Detalhe Tabela em Memória
-// Data da Versão  : 14/06/2022 - 22:00:01
+// Data da Versão  : 14/06/2022 - 21:00:01
 // Analista        : Adriano L. de Mendonça Soares
 ////////////////////////////////////////////////////////////////////////////////
 unit unPedidoVenda;
