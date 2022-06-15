@@ -1,3 +1,4 @@
+use wkteste;
 ﻿
 INSERT INTO `tbcliente` VALUES 
 (1,'MARIA BATISTA MOREIRA','TEÓFILO OTONI','MG'),

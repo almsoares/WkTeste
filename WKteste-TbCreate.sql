@@ -13,6 +13,10 @@ drop view vwpedido;
 drop view vwpedidoproduto;
 */
 
+create database wkteste;
+
+use wkteste;
+
 /*==============================================================*/
 /* Table: tbcliente                                             */
 /*==============================================================*/
@@ -91,7 +95,7 @@ create index ix_tbproduto_001 on tbproduto
 /* View: vwpedido                                               */
 /*==============================================================*/
 create or replace view vwpedido as
-select pedidoid, tbcliente.clienteid, tbcliente.nome, dataemissao, valor, cidade, uf
+select numeropedido, tbcliente.clienteid, tbcliente.nome, dataemissao, valor, cidade, uf
 from tbpedido 
   inner join tbcliente on tbpedido.clienteid = tbcliente.clienteid;
   
@@ -99,7 +103,7 @@ from tbpedido
 /* View: vwpedidoproduto                                        */
 /*==============================================================*/
 create or replace view vwpedidoproduto as
-select pedidoid, pedidoprodutoid, tbproduto.produtoid, descricao, quantidade, valorunitario, valortotal
+select numeropedido, pedidoprodutoid, tbproduto.produtoid, descricao, quantidade, valorunitario, valortotal
 from tbpedidoproduto
 inner join tbproduto on tbproduto.produtoid = tbpedidoproduto.produtoid;
 
