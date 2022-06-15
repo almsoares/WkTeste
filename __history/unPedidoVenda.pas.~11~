@@ -1,3 +1,9 @@
+////////////////////////////////////////////////////////////////////////////////
+// Módulo          : Formulário Pedido de Venda
+// Tipo            : Mestre Detalhe Tabela em Memória
+// Data da Versão  : 14/06/2022 - 00:00:01
+// Analista        : Adriano L. de Mendonça Soares
+////////////////////////////////////////////////////////////////////////////////
 unit unPedidoVenda;
 
 interface
@@ -58,6 +64,9 @@ type
     procedure tbPedidoProdutoAfterDelete(DataSet: TDataSet);
     procedure spbGravarPedidoClick(Sender: TObject);
     procedure spbExcluirPedidoClick(Sender: TObject);
+    procedure DBGridPedidoProdutoDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     { Private declarations }
     Pedido: TPedidoCls;
@@ -149,7 +158,7 @@ begin
   edDataEmissao.Date:= Date;
   ValorPedido.Clear;
   edProdutoID.Clear;
-  edProdutoID.Clear;
+  edDescricao.Clear;
   edQuantidade.Clear;
   edValorUnitario.Clear;
   edCidade.Clear;
@@ -161,12 +170,14 @@ begin
   end;
   tbPedidoProduto.Refresh;
   spbSelecionaPedido.Visible:= True;
+  spbSelecionaPedido.Enabled:= True;
   spbExcluirPedido.Visible:= True;
   spbExcluirPedido.Enabled:= False;
   edNumeroPedido.Visible:= True;
 
   HabilitaCampo(edClienteID);
   HabilitaCampo(edDataEmissao);
+  edDataEmissao.Enabled:= True;
   spbCliente.Enabled:= True;
 
   HabilitaCampo(edProdutoID);
@@ -192,6 +203,7 @@ begin
     if StrToInt(edClienteID.Text)>0 then
     begin
       spbSelecionaPedido.Visible:= False;
+      //spbSelecionaPedido.Enabled:= True;
       spbExcluirPedido.Visible:= False;
       //spbExcluirPedido.Enabled:= False;
 
@@ -384,6 +396,12 @@ begin
   inherited;
   if Trim(edProdutoID.Text)<>'' then
   begin
+    if Trim(edClienteID.Text)='' then
+    begin
+      MostraMensagem('Erro - Cliente', 'Cliente não selecionado');
+      edClienteID.SetFocus;
+      exit;
+    end;
     if StrToInt(edProdutoID.Text)>0 then
     begin
       PedidoProdutoNovo:= TPedidoProdutoCls.Create;
@@ -445,23 +463,19 @@ begin
   FormProdutoGrid.ShowModal;
 end;
 
+procedure TFormPedidoVenda.DBGridPedidoProdutoDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  inherited;
+  if Column.Field.DataType = ftFloat then
+    TFloatField(Column.Field).DisplayFormat := MascaraNumero;
+end;
+
 procedure TFormPedidoVenda.DBGridPedidoProdutoKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 var AuxMsg: string;
-  //Direction : Integer;
-
 begin
   inherited;
-  (*
-  Direction := -1;
-  if Key = VK_UP then Direction := 1; {Previous}
-  if Key = VK_DOWN then Direction := 0; {Next}
-  if Direction <> -1 then
-  begin
-    if Direction = 0 then tbPedidoProduto.Next else tbPedidoProduto.Prior;
-    //NextRecord; {Processes AfterScroll event}
-  end;
-  *)
   if Key = VK_RETURN then
   begin
     edProdutoID.Text:= tbPedidoProduto.FieldByName('produtoid').AsString;
@@ -541,6 +555,7 @@ begin
   QryPadrao.Free;
   DesabilitaCampo(edClienteID);
   DesabilitaCampo(edDataEmissao);
+  edDataEmissao.Enabled:= False;
   spbCliente.Enabled:= False;
 
   DesabilitaCampo(edProdutoID);
@@ -551,6 +566,7 @@ begin
   spbGravarPedido.Enabled:= False;
   spbExcluirPedido.Visible:= True;
   spbExcluirPedido.Enabled:= True;
+  spbSelecionaPedido.Enabled:= False;
 
   FormStatus:= frShow;
 end;

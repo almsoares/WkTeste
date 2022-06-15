@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Classe de dados : ModelClass & classes e tipos de uso geral no sistema
 // Templarium      : 1.8.0.00
-// Data de Geração : 14/06/2022 - 12:00:01
+// Data de Geração : 13/06/2022 - 22:00:01
 // Analista        : Adriano L. de Mendonça Soares
 ////////////////////////////////////////////////////////////////////////////////
 unit unModelCls;
