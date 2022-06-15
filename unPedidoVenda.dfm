@@ -112,6 +112,7 @@ inherited FormPedidoVenda: TFormPedidoVenda
           TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridPedidoProdutoDrawColumnCell
           OnKeyDown = DBGridPedidoProdutoKeyDown
         end
       end

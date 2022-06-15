@@ -432,29 +432,6 @@ begin
          else if ItemColGrid.TipoAtributo = ftTime then
            SQLValues := SQLValues + VarToSql(TDateTime(GetValue(sAtributoID)), 'HH:nn:ss')
          else SQLValues := SQLValues + VarToSql(GetValue(sAtributoID));
-         (*
-         case ItemColGrid.TipoAtributo of
-           ftSmallint, ftInteger, ftWord, ftAutoInc: SQLValues := SQLValues + IntToStr(GetValue(sAtributoID));
-           ftFixedChar, ftString, ftMemo, ftFmtMemo,
-           ftWideString, ftFixedWideChar, ftWideMemo: SQLValues := SQLValues + QuotedStr(GetValue(sAtributoID));
-           ftFloat, ftCurrency:
-             begin
-               FormatedStr := '%' + IntToStr(ItemColGrid.Size) + '.' + IntToStr(ItemColGrid.Precision) + 'f';
-               ValorReal := GetValue(sAtributoID);
-               SQLValues := SQLValues + StringReplace(Trim(Format(FormatedStr, [ValorReal])), ',', '.', [rfReplaceAll]);
-             end;
-           ftDate, ftDateTime:
-             begin
-               ValorData:= GetValue(sAtributoID);
-               if ValorData>0 then
-                 SQLValues := SQLValues + QuotedStr(AnoMesDiaB(ValorData))
-               else
-                 SQLValues := SQLValues + 'Null'
-             end;
-           ftTime: SQLValues := SQLValues + QuotedStr(FormatDateTime('HH:nn:ss',GetValue(sAtributoID)));
-           ftBoolean: SQLValues := SQLValues + IIf(GetValue(sAtributoID), 'True', 'False');
-         end;
-         *)
        end;
      end;
    end;
@@ -493,29 +470,6 @@ begin
      else if ItemColGrid.TipoAtributo = ftTime then
        ValAtributoSQL := VarToSql(TDateTime(GetValue(sAtributoID)), 'HH:nn:ss')
      else ValAtributoSQL := VarToSql(GetValue(sAtributoID));
-     (*
-     case ItemColGrid.TipoAtributo of
-       ftSmallint, ftInteger, ftWord, ftAutoInc: ValAtributoSQL := IntToStr(GetValue(sAtributoID));
-       ftFixedChar, ftString, ftMemo, ftFmtMemo,
-       ftWideString, ftFixedWideChar, ftWideMemo: ValAtributoSQL := QuotedStr(GetValue(sAtributoID));
-       ftFloat, ftCurrency:
-         begin
-           FormatedStr := '%' + IntToStr(ItemColGrid.Size) + '.' + IntToStr(ItemColGrid.Precision) + 'f';
-           ValorReal := GetValue(sAtributoID);
-           ValAtributoSQL := StringReplace(Trim(Format(FormatedStr, [ValorReal])), ',', '.', [rfReplaceAll]);
-         end;
-       ftDate, ftDateTime:
-         begin
-           ValorData:= GetValue(sAtributoID);
-           if ValorData>0 then
-             ValAtributoSQL := QuotedStr(AnoMesDiaB(ValorData))
-           else
-             ValAtributoSQL := 'Null'
-         end;
-       ftTime: ValAtributoSQL := QuotedStr(FormatDateTime('HH:nn:ss',GetValue(sAtributoID)));
-       ftBoolean: ValAtributoSQL := IIf(GetValue(sAtributoID), 'True', 'False');
-     end;
-     *)
      // Montar SQL
      if ItemColGrid.SQLIns then
      begin
